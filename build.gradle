@@ -1,0 +1,51 @@
+plugins {
+	id 'org.asciidoctor.convert' version '1.5.3'
+	id 'org.springframework.boot' version '2.1.4.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.simonjamesrowe'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.3.RELEASE'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-restassured'
+}
+
+ext {
+	snippetsDir = file('build/generated-snippets')
+}
+
+test {
+	outputs.dir snippetsDir
+}
+
+asciidoctor {
+	outputDir "$buildDir/docs"
+	inputs.dir snippetsDir
+	dependsOn test
+}
+
+task publishDocsToArtifact(type: Copy) {
+	dependsOn asciidoctor
+	from  new File(asciidoctor.outputDir, "html5")
+	include "*.html"
+	into "$buildDir/resources/main/static/docs"
+
+}
+
+bootJar {
+	dependsOn publishDocsToArtifact
+}
+

@@ -1,0 +1,37 @@
+= Demo API
+Simon Rowe<simon.rowe@gmail.com>
+:toc: left
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+
+== Introduction
+This demo contains two endpoints.
+
+=== Get all demos
+This endpoint retrieves all demonstrations stored in the system
+
+==== Sample request
+include::{snippets}/SpringRestDocsDemoApplicationTests/testGetAll/curl-request.adoc[]
+
+==== Sample response
+include::{snippets}/SpringRestDocsDemoApplicationTests/testGetAll/http-response.adoc[]
+
+==== Response Spec
+include::{snippets}/SpringRestDocsDemoApplicationTests/testGetAll/response-fields.adoc[]
+
+=== Find Similar Demos
+This endpoint retrieves similar demo's to the one that is passed through in the request body
+
+==== Sample request
+include::{snippets}/SpringRestDocsDemoApplicationTests/testSimilarEntities/curl-request.adoc[]
+
+==== Request Body Spec
+include::{snippets}/SpringRestDocsDemoApplicationTests/testSimilarEntities/request-fields.adoc[]
+
+==== Sample Response
+include::{snippets}/SpringRestDocsDemoApplicationTests/testSimilarEntities/http-response.adoc[]
+
+==== Response Schema
+include::{snippets}/SpringRestDocsDemoApplicationTests/testSimilarEntities/response-fields.adoc[]
+
